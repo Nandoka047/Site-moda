@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loja de Moda Feminina</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #e91e63;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #f8bbd0;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .catalogo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .produto {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 10px;
+      padding: 15px;
+      width: 200px;
+      text-align: center;
+    }
+    .produto img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #e91e63;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #carrinho {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      width: 250px;
+    }
+    #carrinho h3 {
+      margin-top: 0;
+    }
+    #itens-carrinho {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Loja de Moda Feminina & Lingerie</h1>
+  </header>
+
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Produtos</a>
+    <a href="#">Contato</a>
+  </nav>
+
+  <section class="catalogo">
+    <div class="produto">
+      <img src="https://via.placeholder.com/200x250?text=Produto+1" alt="Produto 1">
+      <h3>Conjunto Lingerie Rosa</h3>
+      <p>R$ 79,90</p>
+      <button class="btn" onclick="adicionarCarrinho('Conjunto Lingerie Rosa', 79.90)">Adicionar ao Carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://via.placeholder.com/200x250?text=Produto+2" alt="Produto 2">
+      <h3>Body Renda Preto</h3>
+      <p>R$ 99,90</p>
+      <button class="btn" onclick="adicionarCarrinho('Body Renda Preto', 99.90)">Adicionar ao Carrinho</button>
+    </div>
+  </section>
+
+  <div id="carrinho">
+    <h3>Carrinho</h3>
+    <div id="itens-carrinho"></div>
+    <p><strong>Total: R$ <span id="total">0.00</span></strong></p>
+  </div>
+
+  <script>
+    let carrinho = [];
+    let total = 0;
+
+    function adicionarCarrinho(produto, preco) {
+      carrinho.push({ produto, preco });
+      total += preco;
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      const itensDiv = document.getElementById("itens-carrinho");
+      itensDiv.innerHTML = "";
+      carrinho.forEach(item => {
+        const div = document.createElement("div");
+        div.textContent = item.produto + " - R$ " + item.preco.toFixed(2);
+        itensDiv.appendChild(div);
+      });
+      document.getElementById("total").textContent = total.toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
